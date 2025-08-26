@@ -46,6 +46,13 @@ scene.tx_array = PlanarArray(
     polarization="cross"
 )
 
+scene.rx_array = PlanarArray(num_rows=2,
+                             num_cols=1,
+                             vertical_spacing=0.5,
+                             horizontal_spacing=0.5,
+                             pattern="dipole",
+                             polarization="cross")
+
 # --- Create/Add one transmitter ----------------------------------------------
 tx = Transmitter(
     name="tx",
@@ -118,6 +125,7 @@ h = paths.cfr(
 end_time = time.time()
 runtime = end_time - start_time
 print(f" 코드 런타임: {runtime:.3f} 초")
+
 
 
 
