@@ -79,7 +79,7 @@ rm = rm_solver(
     size=[400, 400],
     orientation=[0, 0, 0]
 )
-print('cut')
+
 # --- Sample receiver positions ------------------------------------------------
 # pos, cell_ids = rm.sample_positions(
 #     num_pos=1,              # Number of random positions per receiver
@@ -92,7 +92,7 @@ print('cut')
 #     center_pos=False
 # )
 
-# print(pos)
+
 
 pos = np.array([[-59.9067, -67.074, 0]])
 # Remove any existing receivers if present
@@ -109,24 +109,28 @@ for pos_idx, rx_position in enumerate(np.squeeze(pos)):
     )
     # Add receiver to the scene
     scene.add(rx)
-print(2)
-start_time = time.time()
-paths = p_solver(scene=scene, max_depth=1, refraction=False)
-print(3)
-frequencies = subcarrier_frequencies(num_subcarriers, subcarrier_spacing)
-# Channel frequency response with time evolution
-h = paths.cfr(
-    frequencies=frequencies,
-    sampling_frequency=1 / ofdm_symbol_duration,
-    num_time_steps=num_ofdm_symbols,
-    normalize_delays=False,
-    normalize=True,
-    out_type="numpy"
-)
 
-end_time = time.time()
-runtime = end_time - start_time
-print(f" 코드 런타임: {runtime:.3f} 초")
+time_data = []
+for idx in range(10):
+    start_time = time.time()
+    paths = p_solver(scene=scene, max_depth=1, refraction=False)
+    print(3)
+    frequencies = subcarrier_frequencies(num_subcarriers, subcarrier_spacing)
+    # Channel frequency response with time evolution
+    h = paths.cfr(
+        frequencies=frequencies,
+        sampling_frequency=1 / ofdm_symbol_duration,
+        num_time_steps=num_ofdm_symbols,
+        normalize_delays=False,
+        normalize=True,
+        out_type="numpy"
+    )
+    
+    end_time = time.time()
+    runtime = end_time - start_time
+    time_data.append(run_time)
+print(f" 코드 평균 런타임: {runtime/10:.3f} 초")
+
 
 
 
