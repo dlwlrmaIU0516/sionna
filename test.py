@@ -128,8 +128,10 @@ for idx in range(10):
     
     end_time = time.time()
     runtime = end_time - start_time
+    print(f" 코드 런타임: {runtime:.3f} 초")
     time_data.append(run_time)
 print(f" 코드 평균 런타임: {runtime/10:.3f} 초")
+
 
 
 
