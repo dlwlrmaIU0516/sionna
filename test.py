@@ -81,18 +81,20 @@ rm = rm_solver(
 )
 print('cut')
 # --- Sample receiver positions ------------------------------------------------
-pos, cell_ids = rm.sample_positions(
-    num_pos=1,              # Number of random positions per receiver
-    metric="sinr",          # Metric used for constraints / TX association
-    min_val_db=-3,          # Minimum value for chosen metric
-    max_val_db=10000,       # Maximum value for chosen metric
-    min_dist=5,             # Min distance from transmitter
-    max_dist=200,           # Max distance from transmitter
-    tx_association=True,    # Choose positions associated with best TX
-    center_pos=False
-)
+# pos, cell_ids = rm.sample_positions(
+#     num_pos=1,              # Number of random positions per receiver
+#     metric="sinr",          # Metric used for constraints / TX association
+#     min_val_db=-3,          # Minimum value for chosen metric
+#     max_val_db=10000,       # Maximum value for chosen metric
+#     min_dist=5,             # Min distance from transmitter
+#     max_dist=200,           # Max distance from transmitter
+#     tx_association=True,    # Choose positions associated with best TX
+#     center_pos=False
+# )
 
-print(pos)
+# print(pos)
+
+pos = np.array([[[-59.9067, -67.074, 0]]])
 # Remove any existing receivers if present
 for key in list(scene.receivers.keys()):
     scene.remove(str(key))
@@ -125,6 +127,7 @@ h = paths.cfr(
 end_time = time.time()
 runtime = end_time - start_time
 print(f" 코드 런타임: {runtime:.3f} 초")
+
 
 
 
