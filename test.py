@@ -92,7 +92,7 @@ pos, cell_ids = rm.sample_positions(
     center_pos=False
 )
 
-print(1)
+print(pos)
 # Remove any existing receivers if present
 for key in list(scene.receivers.keys()):
     scene.remove(str(key))
@@ -125,6 +125,7 @@ h = paths.cfr(
 end_time = time.time()
 runtime = end_time - start_time
 print(f" 코드 런타임: {runtime:.3f} 초")
+
 
 
 
