@@ -1,5 +1,3 @@
-
-
 # --- Imports & setup ----------------------------------------------------------
 try:
     import sionna.rt
@@ -80,70 +78,54 @@ rm = rm_solver(
     orientation=[0, 0, 0]
 )
 
-for iidx in range(30):
-    # --- Sample receiver positions ------------------------------------------------
-    pos, cell_ids = rm.sample_positions(
-        num_pos=1,              # Number of random positions per receiver
-        metric="sinr",          # Metric used for constraints / TX association
-        min_val_db=-3,          # Minimum value for chosen metric
-        max_val_db=10000,       # Maximum value for chosen metric
-        min_dist=5,             # Min distance from transmitter
-        max_dist=200,           # Max distance from transmitter
-        tx_association=True,    # Choose positions associated with best TX
-        center_pos=False
+# --- Sample receiver positions ------------------------------------------------
+# pos, cell_ids = rm.sample_positions(
+#     num_pos=1,              # Number of random positions per receiver
+#     metric="sinr",          # Metric used for constraints / TX association
+#     min_val_db=-3,          # Minimum value for chosen metric
+#     max_val_db=10000,       # Maximum value for chosen metric
+#     min_dist=5,             # Min distance from transmitter
+#     max_dist=200,           # Max distance from transmitter
+#     tx_association=True,    # Choose positions associated with best TX
+#     center_pos=False
+# )
+
+
+
+pos = np.array([[-59.9067, -67.074, 0]])
+# Remove any existing receivers if present
+for key in list(scene.receivers.keys()):
+    scene.remove(str(key))
+
+
+for pos_idx, rx_position in enumerate(np.squeeze(pos)):
+    # Create a receiver
+    rx = Receiver(
+        name=f"rx_{pos_idx}",         # 인덱스로 이름 생성
+        position=rx_position.tolist() if hasattr(rx_position, "tolist") else rx_position,
+        display_radius=2
     )
-    
-    
-    # Remove any existing receivers if present
-    for key in list(scene.receivers.keys()):
-        scene.remove(str(key))
-    
-    
-    for pos_idx, rx_position in enumerate(np.squeeze(pos)):
-        # Create a receiver
-        rx = Receiver(
-            name=f"rx_{pos_idx}",         # 인덱스로 이름 생성
-            position=rx_position.tolist() if hasattr(rx_position, "tolist") else rx_position,
-            display_radius=2
-        )
-        # Add receiver to the scene
-        scene.add(rx)
-    
-    time_data = []
-    for idx in range(10):
-        start_time = time.time()
-        paths = p_solver(scene=scene, max_depth=1, refraction=False)
-        print(3)
-        frequencies = subcarrier_frequencies(num_subcarriers, subcarrier_spacing)
-        # Channel frequency response with time evolution
-        h = paths.cfr(
-            frequencies=frequencies,
-            sampling_frequency=1 / ofdm_symbol_duration,
-            num_time_steps=num_ofdm_symbols,
-            normalize_delays=False,
-            normalize=True,
-            out_type="numpy"
-        )
-        
-        end_time = time.time()
-        runtime = end_time - start_time
-        print(f" 코드 런타임: {runtime:.3f} 초")
-        print(pos)
-        time_data.append(runtime)
-    print(f" 코드 평균 런타임: {runtime/10:.3f} 초")
+    # Add receiver to the scene
+    scene.add(rx)
 
+time_data = []
+for idx in range(10):
+    start_time = time.time()
+    paths = p_solver(scene=scene, max_depth=1, refraction=False)
+    print(3)
+    frequencies = subcarrier_frequencies(num_subcarriers, subcarrier_spacing)
+    # Channel frequency response with time evolution
+    h = paths.cfr(
+        frequencies=frequencies,
+        sampling_frequency=1 / ofdm_symbol_duration,
+        num_time_steps=num_ofdm_symbols,
+        normalize_delays=False,
+        normalize=True,
+        out_type="numpy"
+    )
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    end_time = time.time()
+    runtime = end_time - start_time
+    print(f" 코드 런타임: {runtime:.3f} 초")
+    time_data.append(runtime)
+print(f" 코드 평균 런타임: {runtime/10:.3f} 초")
