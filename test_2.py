@@ -56,13 +56,7 @@ p_solver  = PathSolver()
 
 # Compute propagation paths
 paths = p_solver(scene=scene,
-                 max_depth=5,
-                 los=True,
-                 specular_reflection=True,
-                 diffuse_reflection=False,
-                 refraction=True,
-                 synthetic_array=False,
-                 seed=41)
+                 max_depth=1)
 
 
 a, tau = paths.cir(normalize_delays=True, out_type="numpy")
