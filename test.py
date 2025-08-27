@@ -91,7 +91,7 @@ pos, cell_ids = rm.sample_positions(
 )
 
 
-
+print(pos)
 # pos = np.array([[-59.9067, -67.074, 0]])
 # Remove any existing receivers if present
 for key in list(scene.receivers.keys()):
@@ -129,5 +129,6 @@ for idx in range(10):
     print(f" 코드 런타임: {runtime:.3f} 초")
     time_data.append(runtime)
 print(f" 코드 평균 런타임: {runtime/10:.3f} 초")
+
 
 
