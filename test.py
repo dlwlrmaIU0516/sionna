@@ -92,7 +92,7 @@ rm = rm_solver(
 
 
 
-pos = np.array([[45,90,1.5]])
+pos = np.array([[45,90,27]])
 # Remove any existing receivers if present
 for key in list(scene.receivers.keys()):
     scene.remove(str(key))
@@ -129,4 +129,5 @@ for idx in range(10):
     print(f" 코드 런타임: {runtime:.3f} 초")
     time_data.append(runtime)
 print(f" 코드 평균 런타임: {runtime/10:.3f} 초")
+
 
