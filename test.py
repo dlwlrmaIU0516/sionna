@@ -82,10 +82,10 @@ rm = rm_solver(
 pos, cell_ids = rm.sample_positions(
     num_pos=2,              # Number of random positions per receiver
     metric="sinr",          # Metric used for constraints / TX association
-    min_val_db=-3,          # Minimum value for chosen metric
+    min_val_db=-30,          # Minimum value for chosen metric
     max_val_db=10000,       # Maximum value for chosen metric
-    min_dist=5,             # Min distance from transmitter
-    max_dist=200,           # Max distance from transmitter
+    min_dist=0,             # Min distance from transmitter
+    max_dist=2000,           # Max distance from transmitter
     tx_association=True,    # Choose positions associated with best TX
     center_pos=False
 )
@@ -129,6 +129,7 @@ print(pos)
 #     print(f" 코드 런타임: {runtime:.3f} 초")
 #     time_data.append(runtime)
 # print(f" 코드 평균 런타임: {runtime/10:.3f} 초")
+
 
 
 
