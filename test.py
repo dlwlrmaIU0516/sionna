@@ -81,7 +81,7 @@ rm = rm_solver(
 )
 
 for iidx in range(30):
-    --- Sample receiver positions ------------------------------------------------
+    # --- Sample receiver positions ------------------------------------------------
     pos, cell_ids = rm.sample_positions(
         num_pos=1,              # Number of random positions per receiver
         metric="sinr",          # Metric used for constraints / TX association
@@ -131,6 +131,7 @@ for iidx in range(30):
         print(pos)
         time_data.append(runtime)
     print(f" 코드 평균 런타임: {runtime/10:.3f} 초")
+
 
 
 
