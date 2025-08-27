@@ -111,7 +111,7 @@ for pos_idx, rx_position in enumerate(np.squeeze(pos)):
 time_data = []
 for idx in range(10):
     start_time = time.time()
-    paths = p_solver(scene=scene, max_depth=1, refraction=False)
+    paths = p_solver(scene=scene, max_depth=5, refraction=False)
     print(3)
     frequencies = subcarrier_frequencies(num_subcarriers, subcarrier_spacing)
     # Channel frequency response with time evolution
@@ -129,3 +129,4 @@ for idx in range(10):
     print(f" 코드 런타임: {runtime:.3f} 초")
     time_data.append(runtime)
 print(f" 코드 평균 런타임: {runtime/10:.3f} 초")
+
