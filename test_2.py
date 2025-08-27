@@ -7,7 +7,7 @@ except ImportError as e:
     import sionna.rt
 
 # Other imports
-%matplotlib inline
+
 import matplotlib.pyplot as plt
 import numpy as np
 
