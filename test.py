@@ -67,16 +67,16 @@ scene.get("tx").velocity = tx_velocity
 rm_solver = RadioMapSolver()
 p_solver  = PathSolver()
 
-# Configure radio map sampling region (from the screenshot)
-rm = rm_solver(
-    scene,
-    max_depth=5,
-    samples_per_tx=10**7,
-    cell_size=(5, 5),
-    center=[0, 0, 0],
-    size=[400, 400],
-    orientation=[0, 0, 0]
-)
+# # Configure radio map sampling region (from the screenshot)
+# rm = rm_solver(
+#     scene,
+#     max_depth=1,
+#     samples_per_tx=10**7,
+#     cell_size=(5, 5),
+#     center=[0, 0, 0],
+#     size=[400, 400],
+#     orientation=[0, 0, 0]
+# )
 
 # # --- Sample receiver positions ------------------------------------------------
 # pos, cell_ids = rm.sample_positions(
@@ -129,6 +129,7 @@ for idx in range(10):
     print(f" 코드 런타임: {runtime:.3f} 초")
     time_data.append(runtime)
 print(f" 코드 평균 런타임: {runtime/10:.3f} 초")
+
 
 
 
