@@ -1,4 +1,4 @@
-# --- Imports & setup ----------------------------------------------------------
+#  --- Imports & setup ----------------------------------------------------------
 try:
     import sionna.rt
 except ImportError:
@@ -67,18 +67,18 @@ scene.get("tx").velocity = tx_velocity
 rm_solver = RadioMapSolver()
 p_solver  = PathSolver()
 
-# # Configure radio map sampling region (from the screenshot)
-# rm = rm_solver(
-#     scene,
-#     max_depth=1,
-#     samples_per_tx=10**7,
-#     cell_size=(5, 5),
-#     center=[0, 0, 0],
-#     size=[400, 400],
-#     orientation=[0, 0, 0]
-# )
+# Configure radio map sampling region (from the screenshot)
+rm = rm_solver(
+    scene,
+    max_depth=5,
+    samples_per_tx=10**7,
+    cell_size=(5, 5),
+    center=[0, 0, 0],
+    size=[400, 400],
+    orientation=[0, 0, 0]
+)
 
-# # --- Sample receiver positions ------------------------------------------------
+# --- Sample receiver positions ------------------------------------------------
 # pos, cell_ids = rm.sample_positions(
 #     num_pos=1,              # Number of random positions per receiver
 #     metric="sinr",          # Metric used for constraints / TX association
@@ -91,8 +91,7 @@ p_solver  = PathSolver()
 # )
 
 
-# print(pos)
-# pos = np.array([[45,90,1.5]])
+
 pos = np.array([[-59.9067, -67.074, 0]])
 # Remove any existing receivers if present
 for key in list(scene.receivers.keys()):
@@ -130,15 +129,3 @@ for idx in range(10):
     print(f" 코드 런타임: {runtime:.3f} 초")
     time_data.append(runtime)
 print(f" 코드 평균 런타임: {runtime/10:.3f} 초")
-
-
-
-
-
-
-
-
-
-
-
-
