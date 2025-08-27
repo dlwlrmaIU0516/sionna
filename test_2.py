@@ -11,7 +11,6 @@ except ImportError as e:
 import matplotlib.pyplot as plt
 import numpy as np
 
-no_preview = True # Toggle to False to use the preview widget
 
 # Import relevant components from Sionna RT
 from sionna.rt import load_scene, PlanarArray, Transmitter, Receiver, Camera,\
@@ -50,8 +49,6 @@ rx = Receiver(name="rx",
 
 # Add receiver instance to scene
 scene.add(rx)
-
-tx.look_at(rx) # Transmitter points towards receiver
 
 # Instantiate a path solver
 # The same path solver can be used with multiple scenes
